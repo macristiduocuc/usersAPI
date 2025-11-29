@@ -1,13 +1,13 @@
 package com
 
-import com.data.UserRepository
-import com.model.UserRequest
-import com.model.LoginRequest
-import com.service.UserService
+import com.data.UserRepository // Importa el repositorio
+import com.model.UserRequest // Importa el modelo
+import com.model.LoginRequest // Importa el modelo (corrige el error de clase no encontrada)
+import com.service.UserService // Importa el servicio
 import io.github.jan.supabase.SupabaseClient
 import io.ktor.server.application.*
-import io.ktor.server.request.* // Necesario para call.receive()
-import io.ktor.server.response.* // Necesario para call.respond()
+import io.ktor.server.request.* // Necesario para call.receive() (corrige el error de 'receive')
+import io.ktor.server.response.* // Necesario para call.respond() (corrige el error de 'respond')
 import io.ktor.server.routing.*
 
 // Se modifica para recibir el cliente Supabase
@@ -23,7 +23,7 @@ fun Application.configureRouting(supabaseClient: SupabaseClient) {
             call.respondText("Hello World!")
         }
 
-        // Rutas para /users (basado en UserControllers.kt)
+        // Rutas para /users
         route("/users") { //
 
             // GET /users

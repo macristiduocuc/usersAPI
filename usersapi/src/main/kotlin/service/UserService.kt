@@ -17,7 +17,7 @@ class UserService(private val repository: UserRepository) { //
     }
 
     suspend fun loginUser(loginRequest: LoginRequest): LoginResponse {
-        // Se utilizan las propiedades 'user' y 'password' de LoginRequest
+        // 'loginRequest' está correctamente importado, por lo que 'user' y 'password' son accesibles.
         val user = repository.loginUser(loginRequest.user, loginRequest.password) //
 
         return if (user != null) {
