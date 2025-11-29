@@ -7,11 +7,12 @@ import io.github.jan.supabase.postgrest.Postgrest
 import io.ktor.server.application.*
 
 fun Application.configureSupabaseClient(): SupabaseClient {
-    // ⚠️ Leer directamente de las variables de entorno, que Railway debe inyectar.
-    // Usamos getenv() para leer directamente del entorno, pero Ktor prefiere environment.config
-    // Forzamos la lectura de la configuración de Ktor que ahora debe venir del entorno:
-    val supabaseUrl = environment.config.property("supabase.url").getString()
-    val supabaseKey = environment.config.property("supabase.key").getString()
+    // Lee directamente de las variables de entorno del sistema (standard environment variables).
+    // Si no existen, lanza una excepción (nunca debería ocurrir en Railway).
+    val supabaseUrl = System.getenv("SUPABASE_URL")
+        ?: throw IllegalStateException("SUPABASE_URL environment variable is not set.")
+    val supabaseKey = System.getenv("SUPABASE_KEY")
+        ?: throw IllegalStateException("SUPABASE_KEY environment variable is not set.")
 
     return createSupabaseClient(
         supabaseUrl = supabaseUrl,
